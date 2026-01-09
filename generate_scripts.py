@@ -1,5 +1,8 @@
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ## FILE NAME
 file_name = 'script_output.txt'
@@ -15,10 +18,27 @@ completion = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a professional scriptwriter who writes engaging YouTube short video scripts."
-            "First, choose a highly engaging topic that is trending on YouTube Shorts. Can be related to tech, lifestyle, health, or entertainment."
-            "Write a 2-minute video script while using a fast paced engaging tone with clear visual cues."
-            "Remember to keep the script short and concise and engaging, suitable for a short video format."
+            "content": """
+                        You are a professional scriptwriter who writes engaging YouTube Shorts scripts.
+                        Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
+                        Keep it concise and suitable for short video format.
+                        Choose from a variety of topics like, tech, science, lifestyle, and entertainment but one per script.
+                        Don't talk about 2 or more topics in one script.
+            
+
+                        IMPORTANT OUTPUT FORMAT:
+                        You MUST output the text in the following structure exactly.
+
+                        ===SCRIPT===
+                        (Write only the narration here. No scene numbers or decriptions on what the host is doing, just narration.)
+
+                        ===PROMPTS===
+                        Write exactly 7 cinematic image prompts.
+                        Each prompt must describe a different visual moment.
+                        No dialogue. No explanations.
+                        One prompt per line, numbered 1 to 7.
+                        Focus on strong visual imagery only.
+                    """
         }
     ],
     temperature=0.9
