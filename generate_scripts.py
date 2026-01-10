@@ -22,7 +22,8 @@ Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
 Split it into 10 parts. Each part of talking should be **no more than 12 seconds long**.
 Each segmeent should no be too short, a single narration should at least have 37 words or more.
 Keep it concise and suitable for a short video format.
-Choose only **one topic per script** (tech, science, lifestyle, or entertainment).
+Talk on only Tech, AI and Computers.
+Pick a subject from those topics and write on that.
 
 IMPORTANT OUTPUT FORMAT:
 

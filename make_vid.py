@@ -114,7 +114,7 @@ ffmpeg_cmd = [
         "PrimaryColour=&H00FFFFFF,"  # White text
         "BorderStyle=1,"     # 1=Outline, 3=Background Box
         "Outline=0,"         # Thickness of the black outline
-        "Shadow=0'"          # No drop shadow for a cleaner look
+        "Shadow=1'"          # No drop shadow for a cleaner look
     ),
     '-c:a', 'copy', 
     FINAL_VIDEO

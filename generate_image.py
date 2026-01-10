@@ -1,55 +1,61 @@
 import os
 import json
 import requests
+import time
+import base64  # Needed to decode the image string
 
 # ---------------- CONFIG ----------------
-API_URL = "https://api.imagegpt.online/generate/text-image"
-API_KEY = "imagegpt-2VSCramD5uaXSRtG8ydYGS6Ht0j1"
-
-WIDTH = 1080
-HEIGHT = 1920
-BASE_SEED = 51
-MODEL = "flux"
-MAX_IMAGES = 10
-
+ACCOUNT_ID = "1009d37ae137647b1e187d25fd12ec3e"
+API_TOKEN = "xKmsUfMcTNUqvx2Y0xBL_eu1elYiD4IIGOERlxm1"
+MODEL = "@cf/black-forest-labs/flux-1-schnell"
 PROMPTS_FILE = "prompts.json"
 OUTPUT_DIR = "images"
 # ----------------------------------------
 
-# Create images folder if it doesn't exist
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
+API_URL = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/run/{MODEL}"
 
-# Load prompts
 with open(PROMPTS_FILE, "r", encoding="utf-8") as f:
-    prompts = json.load(f)["prompts"][:MAX_IMAGES]
+    prompts = json.load(f)["prompts"]
 
-headers = {
-    "Content-Type": "application/json",
-    "x-api-key": API_KEY
-}
+print(f"🚀 Decoding Base64 images from Cloudflare into /{OUTPUT_DIR}...")
 
 for index, prompt in enumerate(prompts):
-    seed = BASE_SEED + index
+    image_name = f"image_{index+1}.png"
+    image_path = os.path.join(OUTPUT_DIR, image_name)
+    
+    print(f"🎨 Generating {index+1}/{len(prompts)}...", end="", flush=True)
 
     payload = {
-        "prompt": prompt,
-        "width": WIDTH,
-        "height": HEIGHT,
-        "seed": seed,
-        "model": MODEL,
-        "outputType": "binary"
+        "prompt": f"{prompt}, high quality, realistic, 8k",
+        "num_steps": 4 
     }
 
-    print(f"🎨 Generating image {index + 1}/{len(prompts)} (seed={seed})")
+    try:
+        response = requests.post(API_URL, headers=headers, json=payload)
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Cloudflare returns: {"result": {"image": "BASE64_STRING_HERE"}}
+            if "result" in data and "image" in data["result"]:
+                image_base64 = data["result"]["image"]
+                
+                # Convert the text string back into actual image bytes
+                image_binary = base64.b64decode(image_base64)
+                
+                with open(image_path, "wb") as f:
+                    f.write(image_binary)
+                print(" ✅ SUCCESS")
+            else:
+                print(f" ❌ UNEXPECTED JSON FORMAT: {data}")
+        else:
+            print(f" ❌ ERROR {response.status_code}: {response.text}")
 
-    response = requests.post(API_URL, headers=headers, json=payload)
+        time.sleep(1)
 
-    if response.status_code == 200:
-        image_path = os.path.join(OUTPUT_DIR, f"image_{index + 1}.png")
-        with open(image_path, "wb") as f:
-            f.write(response.content)
-        print(f"✅ Saved: {image_path}")
-    else:
-        print(f"❌ Failed image {index + 1}: {response.status_code}")
-        print(response.text)
-print(" Image generation complete!")
+    except Exception as e:
+        print(f" ❌ SCRIPT ERROR: {e}")
+
+print("\n✨ All images decoded and saved! You can open them now.")

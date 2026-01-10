@@ -11,7 +11,7 @@ FOLDERS_TO_CLEAN = [
 ]
 
 # SAFETY SWITCH: Set this to False to actually delete files
-DRY_RUN = True 
+DRY_RUN = False 
 # ==========================================
 
 def clean_folders():
