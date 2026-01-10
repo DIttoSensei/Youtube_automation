@@ -1,0 +1,40 @@
+1
+00:00:00,000 --> 00:00:08,780
+Welcome to 'Future Tech', where innovation meets wonder. I'm your host, and today we're exploring the world of augmented reality.
+
+2
+00:00:08,780 --> 00:00:14,520
+Imagine wearing a smart glasses that turns the ordinary into an extraordinary experience.
+
+3
+00:00:14,520 --> 00:00:21,700
+Augmented reality is no longer just a concept, it's a reality that's changing the way we live and interact with the world.
+
+4
+00:00:21,700 --> 00:00:28,540
+From gaming to education, AR is revolutionizing industries and redefining the boundaries of what's possible.
+
+5
+00:00:28,540 --> 00:00:34,710
+But, how does it work? Let's dive into the tech and explore the possibilities.
+
+6
+00:00:34,710 --> 00:00:41,570
+At its core, AR uses a combination of hardware and software to layer digital information onto the real world.
+
+7
+00:00:41,570 --> 00:00:49,900
+Smart glasses, like the ones from Vuzix or Epson, use advanced display technology to project high-resolution images in front of the user.
+
+8
+00:00:49,900 --> 00:00:58,280
+But, what about the software? That's where the magic happens with the help of AR engines and frameworks like ARKit or ARcore.
+
+9
+00:00:58,280 --> 00:01:06,100
+These engines provide the tools and resources needed to create immersive experiences, from simple games to complex simulations.
+
+10
+00:01:06,100 --> 00:01:13,280
+So, what's the future of AR looking like? One thing's for sure, it's an exciting time to be alive.
+

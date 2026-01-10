@@ -10,7 +10,7 @@ WIDTH = 1080
 HEIGHT = 1920
 BASE_SEED = 51
 MODEL = "flux"
-MAX_IMAGES = 7
+MAX_IMAGES = 10
 
 PROMPTS_FILE = "prompts.json"
 OUTPUT_DIR = "images"
