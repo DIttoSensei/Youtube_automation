@@ -1,0 +1,4 @@
+HUGGING_FACE_API_KEY = ''
+#---CLOUDflare_API_KEY----#
+ACCOUNT_ID = ''
+API_TOKEN = ''
