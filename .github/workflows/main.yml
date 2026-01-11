@@ -20,6 +20,13 @@ jobs:
         run: |
           pip install google-auth-oauthlib google-api-python-client openai requests moviepy edge-tts python-dotenv
 
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg imagemagick
+          # This line fixes the "security policy" error that stops MoviePy
+          sudo sed -i 's/none/read,write/g' /etc/ImageMagick-6/policy.xml
+      
       - name: Run Main Script
         env:
           # Mapping your HUGGING_FACE_API_KEY secret to every possible name
