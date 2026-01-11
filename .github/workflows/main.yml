@@ -1,0 +1,30 @@
+name: Daily Tech Mage Upload
+on:
+  schedule:
+    - cron: '0 18 * * *' # Runs daily at 18:00 UTC (7PM Nigeria)
+  workflow_dispatch:      # Allows you to click a button to run it manually
+
+jobs:
+  run-tech-mage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install google-auth-oauthlib google-api-python-client openai requests moviepy edge-tts python-dotenv
+
+      - name: Run Main Script
+        env:
+          # This connects your GitHub Secrets to the code
+          PICKLE_TOKEN: ${{ secrets.PICKLE_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+        run: python main.py
