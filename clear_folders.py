@@ -2,53 +2,63 @@ import os
 import shutil
 
 # ================= CONFIG =================
-# List the folders you want to empty here
+# 1. Folders to empty completely
 FOLDERS_TO_CLEAN = [
     "output",
     "audio_segments",
     "images",
-    # "images",  <-- Add more paths here if needed
+]
+
+# 2. Specific files in the current folder to delete
+FILES_TO_DELETE = [
+    "content.json",
+    "prompts.json",
+    "script_output.txt",
 ]
 
 # SAFETY SWITCH: Set this to False to actually delete files
 DRY_RUN = False 
 # ==========================================
 
-def clean_folders():
-    if DRY_RUN:
-        print("--- 🛡️ DRY RUN MODE: No files will be deleted ---")
-    else:
-        print("--- ⚠️ WARNING: Deleting files for real ---")
+def clean_tech_mage():
+    # 🛡️ PROTECT THE SYSTEM: Files that should NEVER be deleted
+    PROTECTED = [os.path.basename(__file__), "client_secrets.json", "token.pickle"]
 
+    print(f"--- {'🛡️ DRY RUN' if DRY_RUN else '⚠️ REAL DELETE'} MODE ---")
+
+    # Part 1: Clean Folders
     for folder in FOLDERS_TO_CLEAN:
-        if not os.path.exists(folder):
-            print(f"❓ Folder not found, skipping: {folder}")
+        if os.path.exists(folder):
+            print(f"🧹 Emptying folder: {folder}")
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+                delete_item(file_path)
+
+    # Part 2: Clean Specific Files in current dir
+    print("🎯 Cleaning specific targeted files...")
+    for filename in FILES_TO_DELETE:
+        if filename in PROTECTED:
+            print(f"   🚫 Safety block: Refusing to delete {filename}")
             continue
-
-        print(f"🧹 Cleaning folder: {folder}")
-
-        # Loop through every file/folder inside the target folder
-        for filename in os.listdir(folder):
-            file_path = os.path.join(folder, filename)
             
-            try:
-                if DRY_RUN:
-                    print(f"  [WOULD DELETE] {file_path}")
-                else:
-                    # Check if it's a file or a sub-folder
-                    if os.path.isfile(file_path) or os.path.islink(file_path):
-                        os.unlink(file_path) # Delete file or link
-                    elif os.path.isdir(file_path):
-                        shutil.rmtree(file_path) # Delete sub-folder
-                    print(f"  [DELETED] {file_path}")
-                    
-            except Exception as e:
-                print(f"  ❌ Failed to delete {file_path}. Reason: {e}")
+        if os.path.exists(filename):
+            delete_item(filename)
+        else:
+            print(f"   ❓ File not found: {filename}")
 
-    if DRY_RUN:
-        print("\n✨ Dry run complete. Set 'DRY_RUN = False' to execute.")
-    else:
-        print("\n✅ Cleanup finished.")
+def delete_item(path):
+    try:
+        if DRY_RUN:
+            print(f"   [WOULD DELETE] {path}")
+        else:
+            if os.path.isfile(path) or os.path.islink(path):
+                os.unlink(path)
+            elif os.path.isdir(path):
+                shutil.rmtree(path)
+            print(f"   [DELETED] {path}")
+    except Exception as e:
+        print(f"   ❌ Error on {path}: {e}")
 
 if __name__ == "__main__":
-    clean_folders()
+    clean_tech_mage()
+    print("\n✅ Cleanup finished.")

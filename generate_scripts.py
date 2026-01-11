@@ -1,4 +1,5 @@
 import os
+from config import TechMageConfig
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -8,7 +9,7 @@ file_name = 'script_output.txt'
 
 client = OpenAI(
     base_url="https://router.huggingface.co/v1",
-    api_key=os.getenv('HF_TOKEN'),
+    api_key=TechMageConfig.HUGGING_FACE_API_KEY,
 )
 
 completion = client.chat.completions.create(

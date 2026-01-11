@@ -2,11 +2,12 @@ import os
 import json
 import requests
 import time
+from config import TechMageConfig
 import base64  # Needed to decode the image string
 
 # ---------------- CONFIG ----------------
-ACCOUNT_ID = "1009d37ae137647b1e187d25fd12ec3e"
-API_TOKEN = "xKmsUfMcTNUqvx2Y0xBL_eu1elYiD4IIGOERlxm1"
+ACCOUNT_ID = TechMageConfig.ACCOUNT_ID
+API_TOKEN = TechMageConfig.API_TOKEN
 MODEL = "@cf/black-forest-labs/flux-1-schnell"
 PROMPTS_FILE = "prompts.json"
 OUTPUT_DIR = "images"
