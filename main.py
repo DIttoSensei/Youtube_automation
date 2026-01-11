@@ -70,7 +70,7 @@ def main():
     wait_for_files([FINAL_VIDEO])
 
     # STEP 6: Upload to YouTube
-    run_script("upload_video.py")
+    run_script("upload.py")
 
     # STEP 7: Wait 7 seconds then Clear Folders
     print(f"💤 Final 7s wait before clearing folders...")
