@@ -2,16 +2,22 @@ import os
 import json
 import requests
 import time
-from config import TechMageConfig
-import base64  # Needed to decode the image string
+import base64
 
-# ---------------- CONFIG ----------------
-ACCOUNT_ID = TechMageConfig.ACCOUNT_ID
-API_TOKEN = TechMageConfig.API_TOKEN
+# ---------------- CONFIG (CLOUD READY) ----------------
+# We pull these directly from GitHub's environment variables
+ACCOUNT_ID = os.getenv("ACCOUNT_ID")
+API_TOKEN = os.getenv("CLOUDFLARE_API_TOKEN")
+
 MODEL = "@cf/black-forest-labs/flux-1-schnell"
 PROMPTS_FILE = "prompts.json"
 OUTPUT_DIR = "images"
-# ----------------------------------------
+
+# Safety check: Stop the script if the keys are missing
+if not ACCOUNT_ID or not API_TOKEN:
+    print("❌ ERROR: Missing ACCOUNT_ID or CLOUDFLARE_API_TOKEN in environment!")
+    exit(1)
+# ------------------------------------------------------
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 headers = {"Authorization": f"Bearer {API_TOKEN}"}

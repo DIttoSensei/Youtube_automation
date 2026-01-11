@@ -5,11 +5,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
 file_name = 'script_output.txt'
+
+# Use the HF_TOKEN directly from environment variables
+hf_token = os.getenv("HF_TOKEN")
+
+if not hf_token:
+    print("❌ Error: HF_TOKEN not found in environment variables!")
+    exit(1)
 
 client = OpenAI(
     base_url="https://router.huggingface.co/v1",
-    api_key=TechMageConfig.HUGGING_FACE_API_KEY,
+    api_key=hf_token, # Passing it here satisfies the library's check
 )
 
 completion = client.chat.completions.create(
