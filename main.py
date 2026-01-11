@@ -69,11 +69,15 @@ def main():
     run_script("make_vid.py")
     wait_for_files([FINAL_VIDEO])
 
-    # STEP 6: Upload to YouTube
+    # STEP 6: Upload to Facebook (NEW - Runs First)
+    # If this fails, sys.exit(1) triggers and YouTube (Step 7) never runs.
+    run_script("upload_facebook.py")
+
+    # STEP 7: Upload to YouTube
     run_script("upload.py")
 
-    # STEP 7: Wait 7 seconds then Clear Folders
-    print(f"💤 Final 7s wait before clearing folders...")
+    # STEP 8: Final Cleanup
+    print(f"💤 Final {STEP_DELAY}s wait before clearing folders...")
     time.sleep(STEP_DELAY)
     run_script("clear_folders.py")
 
