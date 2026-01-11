@@ -1,7 +1,7 @@
 name: Daily Tech Mage Upload
 on:
   schedule:
-    - cron: '0 18 * * *' # Runs daily at 18:00 UTC (7PM Nigeria)
+    - cron: '0 11,18 * * *' # Runs daily at 11:00 and 18:00 UTC (7PM Nigeria 12PM)
   workflow_dispatch:      # Allows you to click a button to run it manually
 
 jobs:
