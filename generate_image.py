@@ -7,7 +7,7 @@ import base64
 # ---------------- CONFIG (CLOUD READY) ----------------
 # We pull these directly from GitHub's environment variables
 ACCOUNT_ID = os.getenv("ACCOUNT_ID")
-API_TOKEN = os.getenv("CLOUDFLARE_API_TOKEN")
+API_TOKEN = os.getenv("API_TOKEN")
 
 MODEL = "@cf/black-forest-labs/flux-1-schnell"
 PROMPTS_FILE = "prompts.json"

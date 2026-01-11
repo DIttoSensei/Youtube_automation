@@ -14,7 +14,7 @@ load_dotenv()
 file_name = 'script_output.txt'
 
 # Use the HF_TOKEN directly from environment variables
-hf_token = os.getenv("HF_TOKEN")
+hf_token = os.getenv("HUGGING_FACE_API_KEY")
 
 if not hf_token:
     print("❌ Error: HF_TOKEN not found in environment variables!")
