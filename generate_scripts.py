@@ -39,6 +39,11 @@ Keep it concise and suitable for a short video format.
 Talk on only Tech, AI and Computers.
 Pick a subject from those topics and write on that.
 
+STRICT STYLE RULES:
+1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...', 'My favorite tech...').
+2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment' or a specific piece of information. Squeeze the point in early.
+3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...', 'I found the hidden setting for...').
+
 IMPORTANT OUTPUT FORMAT:
 
 ===SCRIPT===
