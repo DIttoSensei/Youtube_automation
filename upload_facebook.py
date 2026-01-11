@@ -71,7 +71,7 @@ def upload_to_facebook():
     payload = {
         'description': caption,
         'access_token': access_token,
-        'content_category': 'SCIENCE_TECH' 
+        'content_category': 'TECHNOLOGY' 
     }
     
     try:
