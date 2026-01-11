@@ -22,13 +22,13 @@ def run_script(script_name):
     try:
         subprocess.run([sys.executable, script_name], check=True)
         print(f"💤 Waiting {STEP_DELAY}s for system to settle...")
-        time.sleep(STEP_DELAY) # The 7-second buffer
+        time.sleep(STEP_DELAY) 
     except subprocess.CalledProcessError as e:
         print(f"❌ [MAIN] Error running {script_name}: {e}")
         sys.exit(1)
 
 def wait_for_files(file_list, is_dir=False, required_count=0):
-    """Keeps checking for files until they exist and are ready."""
+    """Keeps checking for files until they exist."""
     print(f"⏳ Verifying files...")
     while True:
         success = False
@@ -44,8 +44,7 @@ def wait_for_files(file_list, is_dir=False, required_count=0):
         if success:
             print(f"✅ Verified! Proceeding to next task.")
             break
-        
-        time.sleep(2) # Re-check every 2 seconds
+        time.sleep(2)
 
 def main():
     print("--- 🪄 TECH MAGE AUTOMATION STARTING ---")
@@ -68,14 +67,19 @@ def main():
 
     # STEP 5: Render Video
     run_script("make_vid.py")
-    
-    if os.path.exists(FINAL_VIDEO):
-        print("\n" + "="*40)
-        print(f"🎉 TECH MAGE: MISSION ACCOMPLISHED!")
-        print(f"Video ready at: {FINAL_VIDEO}")
-        print("="*40)
-    else:
-        print("⚠️ Video rendering finished but file not found.")
+    wait_for_files([FINAL_VIDEO])
+
+    # STEP 6: Upload to YouTube
+    run_script("upload_video.py")
+
+    # STEP 7: Wait 7 seconds then Clear Folders
+    print(f"💤 Final 7s wait before clearing folders...")
+    time.sleep(STEP_DELAY)
+    run_script("clear_folders.py")
+
+    print("\n" + "="*40)
+    print(f"🎉 TECH MAGE: MISSION ACCOMPLISHED!")
+    print("="*40)
 
 if __name__ == "__main__":
     main()
