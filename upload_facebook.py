@@ -3,38 +3,42 @@ import requests
 import json
 import re
 import sys
+from datetime import datetime
 
 # ================= CONFIG =================
 VIDEO_PATH = "output/final_video_subtitled.mp4"
 SCRIPT_FILE = "script_output.txt"
+LOG_FILE = "automation_errors.log"
 # ==========================================
-ai_disclosure = (
-    "ℹ️ This video includes AI-generated narration and/or visuals."
-)
+
+ai_disclosure = "ℹ️ This video includes AI-generated narration and/or visuals."
+
+def log_error(message):
+    """Logs errors so you can check them later without stopping the whole process."""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(f"[{timestamp}] FB_ERROR: {message}\n")
+    print(f"⚠️ LOGGED TO FILE: {message}")
 
 def get_viral_caption():
-    """Constructs a high-engagement caption with a fixed viral structure."""
-    
-    # 1. Fixed Viral Branding & Headline
+    """Constructs a high-engagement caption using YOUR exact viral structure."""
     header = "🧙‍♂️ TECH MAGE CHRONICLES"
     headline = "THE AI REVOLUTION IS HERE. ARE YOU READY? 💻🚀"
-
-    # 2. Dynamic Hook Extraction (Cleaned)
     dynamic_hook = "Breaking down the future of technology."
+
+    # --- YOUR ORIGINAL HOOK EXTRACTION ---
     try:
         if os.path.exists(SCRIPT_FILE):
             with open(SCRIPT_FILE, "r", encoding="utf-8") as f:
                 content = f.read()
-                # Find the first "text" value in the JSON script
                 texts = re.findall(r'"text":\s*"(.*?)"', content)
                 if texts:
-                    # Take first 8 words to keep it punchy
                     words = texts[0].split()
                     dynamic_hook = " ".join(words[:8]) + "..."
     except Exception as e:
-        print(f"⚠️ Could not parse hook: {e}")
+        log_error(f"Could not parse hook: {e}")
 
-    # 3. The "Viral Loop" Body & Hashtags (The Exact Format You Requested)
+    # --- YOUR EXACT VIRAL CAPTION FORMAT ---
     caption = f"""{header}
 {headline}
 
@@ -47,59 +51,49 @@ What's inside:
 🔥 Expert Tech Breakdown
 🔥 No-Fluff Innovation
 
-
 {ai_disclosure}
 
-#TechMage #AI #ArtificialIntelligence #FutureTech #Programming #ComputerScience #TechNews #Innovation #Software #CodingLife #ViralTech #TechTrends2026"""
+#TechMage #AI #ArtificialIntelligence #FutureTech #Programming #ComputerScience #TechNews #Innovation #Software #CodingLife #ViralTech #TechTrends2026 #MadeWithAI"""
     
     return caption
 
 def upload_to_facebook():
-    """Uploads the video using the Facebook Graph API."""
+    """Uploads with a safety check so YouTube can still run if this fails."""
     page_id = os.getenv("FB_PAGE_ID")
     access_token = os.getenv("FB_PAGE_ACCESS_TOKEN")
     
-    # Validation
     if not page_id or not access_token:
-        print("❌ ERROR: Facebook Credentials (FB_PAGE_ID or FB_PAGE_ACCESS_TOKEN) not found!")
-        sys.exit(1) # Stops main.py
+        log_error("Credentials missing (FB_PAGE_ID/TOKEN)")
+        return
 
     if not os.path.exists(VIDEO_PATH):
-        print(f"❌ ERROR: Video file not found at {VIDEO_PATH}")
-        sys.exit(1) # Stops main.py
+        log_error(f"Video file not found at {VIDEO_PATH}")
+        return
 
+    url = f"https://graph-video.facebook.com/v19.0/{page_id}/videos"
     caption = get_viral_caption()
 
-    # Facebook Graph API Video Endpoint
-    url = f"https://graph-video.facebook.com/v19.0/{page_id}/videos"
-    
-    # Multi-part form data
     payload = {
         'description': caption,
         'access_token': access_token,
-        'content_category': 'TECHNOLOGY' 
+        'content_category': 'TECHNOLOGY'
     }
     
     try:
-        files = {
-            'source': (os.path.basename(VIDEO_PATH), open(VIDEO_PATH, 'rb'), 'video/mp4')
-        }
+        with open(VIDEO_PATH, 'rb') as v_file:
+            files = {'source': (os.path.basename(VIDEO_PATH), v_file, 'video/mp4')}
+            print("🚀 [FB] Initializing Viral Upload...")
+            response = requests.post(url, data=payload, files=files, timeout=300)
+            result = response.json()
 
-        print("🚀 [FB] Initializing Viral Upload...")
-        response = requests.post(url, data=payload, files=files)
-        result = response.json()
-
-        if response.status_code == 200:
-            print(f"✅ SUCCESS! Video is live. FB_ID: {result.get('id')}")
-            # Successful finish (Exit Code 0)
-        else:
-            print(f"❌ FACEBOOK API ERROR: {result.get('error', {}).get('message', 'Unknown Error')}")
-            print(f"Full Response: {json.dumps(result, indent=2)}")
-            sys.exit(1) # FAILURE: Stops main.py from going to YouTube
-            
+            if response.status_code == 200:
+                print(f"✅ SUCCESS! FB_ID: {result.get('id')}")
+            else:
+                log_error(f"API ERROR: {result.get('error', {}).get('message', 'Unknown')}")
     except Exception as e:
-        print(f"❌ CRITICAL UPLOAD ERROR: {e}")
-        sys.exit(1) # FAILURE: Stops main.py
+        log_error(f"CRITICAL SYSTEM ERROR: {e}")
 
 if __name__ == "__main__":
     upload_to_facebook()
+    # 🪄 Crucial: sys.exit(0) tells GitHub "Keep going!" even if FB failed
+    sys.exit(0)
