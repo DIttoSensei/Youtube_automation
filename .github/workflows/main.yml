@@ -1,8 +1,8 @@
 name: Daily Tech Mage Upload
 on:
   schedule:
-    - cron: '0 11,18 * * *' # Runs daily at 11:00 and 18:00 UTC (7PM Nigeria 12PM)
-  workflow_dispatch:      # Allows you to click a button to run it manually
+    - cron: '0 11,18 * * *' # Runs daily at 11:00 and 18:00 UTC
+  workflow_dispatch:      # Allows manual run
 
 jobs:
   run-tech-mage:
@@ -25,36 +25,28 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg imagemagick
-          # This line fixes the "security policy" error that stops MoviePy
           sudo sed -i 's/none/read,write/g' /etc/ImageMagick-6/policy.xml
       
       - name: Run Main Script
         env:
-          # Mapping your HUGGING_FACE_API_KEY secret to every possible name
           HF_TOKEN: ${{ secrets.HUGGING_FACE_API_KEY }}
           HUGGING_FACE_API_KEY: ${{ secrets.HUGGING_FACE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.HUGGING_FACE_API_KEY }}
-          
-          # Mapping your API_TOKEN secret to every possible name
           CLOUDFLARE_API_TOKEN: ${{ secrets.API_TOKEN }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
-          
-          # These already work (they show ***)
           ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
           PICKLE_TOKEN: ${{ secrets.PICKLE_TOKEN }}
-
-          # Facebook API (New)
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+        run: python main.py  # 🪄 FIXED: This is now inside the correct step
 
-      - name: Upload Logs
-        if: always()  # This ensures logs are uploaded even if a previous step failed
+      - name: Upload Logs and Images
+        if: always()  # 🪄 FIXED: Runs even if the script fails
         uses: actions/upload-artifact@v4
         with:
-          name: tech-mage-logs
+          name: tech-mage-outputs
           path: |
             automation_errors.log
             script_output.txt
+            output/
           retention-days: 5
-
-        run: python main.py
