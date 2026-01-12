@@ -8,6 +8,9 @@ import sys
 VIDEO_PATH = "output/final_video_subtitled.mp4"
 SCRIPT_FILE = "script_output.txt"
 # ==========================================
+ai_disclosure = (
+    "ℹ️ This video includes AI-generated narration and/or visuals."
+)
 
 def get_viral_caption():
     """Constructs a high-engagement caption with a fixed viral structure."""
@@ -43,6 +46,9 @@ What's inside:
 🔥 Future-Proof AI Insights
 🔥 Expert Tech Breakdown
 🔥 No-Fluff Innovation
+
+
+{ai_disclosure}
 
 #TechMage #AI #ArtificialIntelligence #FutureTech #Programming #ComputerScience #TechNews #Innovation #Software #CodingLife #ViralTech #TechTrends2026"""
     
