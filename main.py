@@ -71,7 +71,7 @@ def main():
 
     # STEP 6: Upload to Facebook (NEW - Runs First)
     # If this fails, sys.exit(1) triggers and YouTube (Step 7) never runs.
-    #run_script("upload_facebook.py")
+    run_script("upload_facebook.py")
 
     # STEP 7: Upload to YouTube
     run_script("upload.py")
