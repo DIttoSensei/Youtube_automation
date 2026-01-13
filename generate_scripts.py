@@ -44,6 +44,7 @@ STRICT STYLE RULES:
 2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment' or a specific piece of information. Squeeze the point in early.
 3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...', 'I found the hidden setting for...').
 4. Always pick a unique, specific niche within Tech/AI so every video is different.
+5. Just as prompt is 10 segments should also match that.
 
 IMPORTANT OUTPUT FORMAT:
 
