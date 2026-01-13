@@ -1,16 +1,10 @@
 import os
-import json
 from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-
 file_name = 'script_output.txt'
 hf_token = os.getenv("HUGGING_FACE_API_KEY")
-
-if not hf_token:
-    print("❌ Error: HF_TOKEN not found!")
-    exit(1)
 
 client = OpenAI(
     base_url="https://router.huggingface.co/v1",
@@ -23,33 +17,32 @@ completion = client.chat.completions.create(
         {
             "role": "system",
             "content": """
-You are a professional scriptwriter for 'TECH MAGE CHRONICLES'. 
-Write a high-energy script on Tech, AI, or Computers.
+You are a professional scriptwriter who writes engaging YouTube Shorts scripts for 'TECH MAGE CHRONICLES'.
+Write a 2-minute script split into EXACTLY 10 parts. 
 
 STRICT STYLE RULES:
-1. POV: Always FIRST PERSON ('I discovered...', 'I've been testing...').
-2. VALUE DENSITY: Teach something specific. Every segment needs a 'lightbulb moment'.
-3. HOOKS: The first 3 seconds must be a 'pattern interrupt' (e.g., 'Everyone is wrong about...').
-4. NICHE: Pick a unique, specific tech niche.
-5. LENGTH: 10 segments total.
+1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...').
+2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment'. Squeeze the point in early.
+3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...').
+4. Always pick a unique, specific niche within Tech, AI, or Computers.
 
-CONSTRAINTS:
-- Each segment must be between 25 and 32 words.
-- Each segment is exactly 12 seconds of the timeline.
+CONSTRAINTS (To avoid errors):
+- Each segment must be 30 to 35 words (This is the "sweet spot" for 12 seconds).
+- There MUST be exactly 10 segments in the JSON.
+- Total video time: 120 seconds.
 
 IMPORTANT OUTPUT FORMAT:
 
 ===SCRIPT===
 [
-  {"start": 0, "end": 12, "text": "25-32 words of engaging narration here..."},
-  {"start": 12, "end": 24, "text": "Next 25-32 words of narration here..."},
-  ... up to 120 seconds ...
+  {"start": 0, "end": 12, "text": "First segment of 30-35 words..."},
+  {"start": 12, "end": 24, "text": "Second segment of 30-35 words..."},
+  ...
+  {"start": 108, "end": 120, "text": "Tenth segment of 30-35 words..."}
 ]
 
 ===PROMPTS===
-1. Cinematic image prompt...
-...
-10. Cinematic image prompt...
+Write exactly 10 cinematic image prompts, one per line, numbered 1 to 10.
 """
         }
     ],
@@ -59,4 +52,4 @@ IMPORTANT OUTPUT FORMAT:
 with open(file_name, 'w', encoding='utf-8') as f:
     f.write(completion.choices[0].message.content)
 
-print("✅ Script saved to", file_name)
+print("✅ Tech Mage Script Restored and Saved!")
