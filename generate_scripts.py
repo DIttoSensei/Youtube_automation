@@ -29,8 +29,8 @@ Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
 Split it into 10 parts. Each part of talking should be **no more than 12 seconds long**.
 Each segmeent should no be too short, a single narration should at least have 37 words or more.
 Keep it concise and suitable for a short video format.
-Talk on only Tech, AI and Computers.
-Pick a subject from those topics and write on that.
+Talk on only Tech, computer architecture, computer hardware, computer software, ai.
+Pick a subject from those topics and write on that and make sure it something they might not know so they can learn.
 
 STRICT STYLE RULES:
 1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...', 'My favorite tech...').
