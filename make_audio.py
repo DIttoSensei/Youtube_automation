@@ -3,9 +3,12 @@ import asyncio
 import edge_tts
 import os
 
+# ================= CONFIG =================
 SCRIPT_JSON = "content.json"
 OUTPUT_DIR = "audio_segments"
+# Recommendation: "en-US-GuyNeural" or "en-US-AriaNeural"
 VOICE = "en-US-GuyNeural" 
+# ==========================================
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -15,24 +18,20 @@ async def generate_audio():
         segments = data.get("script_segments", [])
 
     for i, seg in enumerate(segments):
-        text = seg["text"].strip()
-        if not text: continue
+        text = seg["text"]
+        start_time = seg["start"]
+        end_time = seg["end"]
+        duration = end_time - start_time
         
         filename = f"{OUTPUT_DIR}/segment_{i}.mp3"
-        
-        # Try up to 3 times to prevent the "NoAudioReceived" crash
-        for attempt in range(3):
-            try:
-                print(f"🎙️ Generating {filename} (Attempt {attempt+1})...")
-                communicate = edge_tts.Communicate(text, VOICE)
-                await communicate.save(filename)
-                
-                if os.path.exists(filename) and os.path.getsize(filename) > 0:
-                    break 
-            except Exception as e:
-                print(f"⚠️ Attempt {attempt+1} failed: {e}")
-                if attempt < 2: await asyncio.sleep(5)
-                else: raise # Only fail after 3 tries
+        print(f"Generating {filename}...")
+
+        # We can adjust the rate (speed) to try and fit the duration
+        # +0% is normal speed. 
+        communicate = edge_tts.Communicate(text, VOICE, rate="+0%")
+        await communicate.save(filename)
+
+    print("\n✅ All audio segments generated!")
 
 if __name__ == "__main__":
     asyncio.run(generate_audio())
