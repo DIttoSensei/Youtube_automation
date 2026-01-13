@@ -14,10 +14,10 @@ This is a tool capable of creating video ideas, from the scripts, to audio to vi
 + Then click **Create new token**.
 + Set the token type to **READ**, give it a name and click create.
 + You will be given an access toke looking like something like this **(hf_wIvGjlwNyrhJHuGFOHbgbfB)**.
-+ Copy the token you are given and save it somewhere like a notepad.
++ Copy the token you are given and save it somewhere on like a notepad.
 
 >[!NOTE]
->The hugging face access token is important make sure not to share it with anyone and keep it safe, it will be required down line the following steps.
+>The hugging face access token is important make sure not to share it with anyone and keep it safe, it will be required down the line in the following steps to come.
 
 ## Step 2
 + Open the root project folder in your computer text editor (VS Code recommended).
