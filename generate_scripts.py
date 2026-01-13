@@ -31,6 +31,8 @@ Each segmeent should no be too short, a single narration should at least have 37
 Keep it concise and suitable for a short video format.
 Talk on only Tech, computer architecture, computer hardware, computer software, ai.
 Pick a subject from those topics and write on that and make sure it something they might not know so they can learn.
+No 'join me as we learn on...' at the end of the video, cause you have to make sure to fit all relevant information and knowledge that you want to pass to the viewers in that segment or script.
+Always tell the viewers to like and subscribe at the end.
 
 STRICT STYLE RULES:
 1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...', 'My favorite tech...').
