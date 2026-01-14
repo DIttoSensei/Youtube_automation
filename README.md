@@ -7,7 +7,7 @@ This is a tool capable of creating video ideas, from the scripts, to audio to vi
 >[!WARNING]
 >I am not responsible for the misuse of this tool and it is only intended for educational purposes to showcase the pipeline process of how automation meets API.
 
-## Step 1
+## Step 1 GETTING REQUIRED API's
 + Head over to https://huggingface.co/ and create a free account.
 + After creating head over to your profile and click settings.
 + After clicking on settings you will see a list of option on the left side, click on the one that says **Access Tokens**.
@@ -29,9 +29,23 @@ This is a tool capable of creating video ideas, from the scripts, to audio to vi
 + Click on select and a drop down menu will appear and select you account *(you will see the email you registed with click that)*.
 + Scroll down and click **Continue to summary**, then you will be taken to another page, there click on create token.
 + You will be take to a page showing you the API key, copy it and keep it somewhere save **(Key looks like a compination of random letters and numbers)**.
++ Now go to https://console.cloud.google.com/ and create an account.
++ Create a new poject and give it name, tho the welcome screen should say you are working on one called **my first project** but if you want to create a new one, at the top click on something that says **My first project** then a small box should appear, at the top right of said box you will see a blue higlited text that says **Create project**. Click it and give it a name and create.
++ You should be greeted with a welcome screen, look for **API and services** and then click it.
++ At the right side you should see **Library** click that and search for **YouTube Data API v3**, once you get the result click it and then you will see an **enable** button, click enable.
++ Now go back to the **API and services** page and on the right side click on **OAuth Consent Screen**
++ In the overview part click on get started and then start to file. In the app information give the app a name eg(testing) and selected your email.
++ Then you will move to Audience, select external. Then you move to contact info, fill with your email address, Then in the finish section select you agree and click **continue** and the **Create**.
++ On the right side of the screen where you have, *Overview, Branding, Audience etc.*, click on **Audience** and scroll down to **Test Users**, click on add users, add your email address and the email you plan to use for your Youtube channel if by chance they are not the same.
++ Check Filter below add user to see if the email is already added.
++ Go back to the **API and services** page and click on **Credentials** (At the right side).
++ Click on **Create Credentials**, you will see some options pick **OAuth client ID**
++ Make the Application type a desktop app and click create.
++ You will be greated with a mini screen, scroll down and click on the **download JSON**
++ Now you have a .JSON file named (client_secret...).
 
 >[!IMPORTANT]
->Technically you should have 3 keys, one form HUGGING face and two from CLOUDFLARE. MAke sure you keep them save cause we will dive deeper soon.
+>Technically you should have 3 keys and one JSON file, one form HUGGING face and two from CLOUDFLARE and one from goggle. Make sure you keep them save cause we will be using them soon.
 
 
 ## Step 2
