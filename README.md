@@ -78,4 +78,9 @@ python get_pickle_string.py
 + Scroll down and create **new repository secrets**.
 + You will need to create 4 secrets if you plan to run for youtube only but 6 if facebook is added to the mix.
 + Here are what you should create:
-    **NAME**                                    **Secret**
+|                           |
+|:-----------:|:-----------:|
+|                           |
+|                           |
+|                           |
+|                           |
