@@ -77,9 +77,15 @@ python get_pickle_string.py
 + Scroll down to **Secrets and variable** and click **Actions**.
 + Scroll down and create **new repository secrets**.
 + You will need to create 4 secrets if you plan to run for youtube only but 6 if facebook is added to the mix.
-+ Here are what you should create:
-+ | Tables   |      Are      |
-|----------|:-------------:|
-| col 1 is |  left-aligned |
-| col 2 is |    centered   |
-| col 3 is | right-aligned |
++ Here are what you should create, filing name and secrets respectivly:
+* HUGGING_FACE_API_KEY = *(the api you got from hugging face)*
+* ACCOUNT_ID = *(the account id you got from cloudflare)
+* API_TOKEN = *(the api you got from cloudflare)
++ If you plan to run facebook along, go to main.py in the project file and go to line 74 and uncomment **run_script("upload_facebook.py")** (means remove the '#' in front of it) and add these two other secrets:
+* FB_PAGE_ACCESS_TOKEN = *(facebook token)*
+* FB_PAGE_ID = *(page id)*
++ After all that go to the action tab and click it (the one on top where you see code, action, insight, pull request etc that are placed side by side).
++ You will see something on the left side that says **Daily Tech Mage Upload** click it.
++ You will see something called **run workflow** click it and confirm **run workflow**.
++ Wait for it to run, you can refresh the page and wait for 5-8 min, if it checks green Congrats if not click and look for the error which can mostly come from you not seeting your secrets properly or having wrong api keys. Do make sure it all correct.
++ If it checks green you are all good the tool will proceed to create post vids automatically by **11:00 and 18:00 UTC**
