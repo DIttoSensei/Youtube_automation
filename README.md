@@ -78,12 +78,13 @@ python get_pickle_string.py
 + Scroll down and create **new repository secrets**.
 + You will need to create 4 secrets if you plan to run for youtube only but 6 if facebook is added to the mix.
 + Here are what you should create, filing name and secrets respectivly:
-* HUGGING_FACE_API_KEY = *(the api you got from hugging face)*
-* ACCOUNT_ID = *(the account id you got from cloudflare)
-* API_TOKEN = *(the api you got from cloudflare)
+1. HUGGING_FACE_API_KEY = *(the api you got from hugging face)*
+2. ACCOUNT_ID = *(the account id you got from cloudflare)
+3. API_TOKEN = *(the api you got from cloudflare)
+4. PICKLE_TOKEN = *(the long pickle string you made)
 + If you plan to run facebook along, go to main.py in the project file and go to line 74 and uncomment **run_script("upload_facebook.py")** (means remove the '#' in front of it) and add these two other secrets:
-* FB_PAGE_ACCESS_TOKEN = *(facebook token)*
-* FB_PAGE_ID = *(page id)*
+5. FB_PAGE_ACCESS_TOKEN = *(facebook token)*
+6. FB_PAGE_ID = *(page id)*
 + After all that go to the action tab and click it (the one on top where you see code, action, insight, pull request etc that are placed side by side).
 + You will see something on the left side that says **Daily Tech Mage Upload** click it.
 + You will see something called **run workflow** click it and confirm **run workflow**.
