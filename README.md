@@ -74,7 +74,7 @@ python get_pickle_string.py
 + To set the sort of video the tools should be making open prompt.py in the project dir and go to line 7 and 16
 + Remove the topics written there and add yours, go through the sentence and just remove and add where some topics were mentioned.
 >[!WARNING]
-> Do not an i repeat do not tamper with the main structure of the prompt, just line 7 and 16.
+> Do not and i repeat do not tamper with the main structure of the prompt, just line 7 and 16.
 
 ## Step 3 RUNNING ON GITHUB
 + Create a private github repo and give it a name *(Remember not to check the add README, just create a blank repo)*.
