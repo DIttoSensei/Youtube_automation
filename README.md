@@ -48,7 +48,7 @@ This is a tool capable of creating video ideas, from the scripts, to audio to vi
 >Technically you should have 3 keys and one JSON file, one form HUGGING face and two from CLOUDFLARE and one from goggle. Make sure you keep them save cause we will be using them soon.
 
 
-## Step 2
+## Step 2 GETTING PICKLE STRING
 + Open the root project folder in your computer text editor (VS Code recommended).
 + Add the JSON file you downloaded inside the root folder.
 + Rename the JSON file to **client_secret.json**.
@@ -67,3 +67,15 @@ python get_pickle.py
 python get_pickle_string.py
 ```
 + Copy the long text it shows on the terminal and save it somewhere safe.
+>[!WARNING]
+>DO NOT ATEMPT TO RUN ANY OTHER FILE EXCEPT THE ONE YOU WERE TOLD TO RUN IN STEP 2.
+
+## Step 3 RUNNING ON GITHUB
++ Create a private github repo and give it a name *(Remember not to check the add README, just create a blank repo)*.
++ On VS code push the project dir to the repo *(If you dont know how look it up)*
++ After pushing go to Github and go to repo settings not account settings Repo settings (You will find it wher you have code, actions, insight etc. This is if you are on desktop).
++ Scroll down to **Secrets and variable** and click **Actions**.
++ Scroll down and create **new repository secrets**.
++ You will need to create 4 secrets if you plan to run for youtube only but 6 if facebook is added to the mix.
++ Here are what you should create:
+    **NAME**                                    **Secret**
