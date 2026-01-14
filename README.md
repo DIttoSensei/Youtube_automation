@@ -70,6 +70,12 @@ python get_pickle_string.py
 >[!WARNING]
 >DO NOT ATEMPT TO RUN ANY OTHER FILE EXCEPT THE ONE YOU WERE TOLD TO RUN IN STEP 2.
 
+## Step 3 SETTING VIDEO NICHE
++ To set the sort of video the tools should be making open prompt.py in the project dir and go to line 7 and 16
++ Remove the topics written there and add yours, go through the sentence and just remove and add where some topics were mentioned.
+>[!WARNING]
+> Do not an i repeat do not tamper with the main structure of the prompt, just line 7 and 16.
+
 ## Step 3 RUNNING ON GITHUB
 + Create a private github repo and give it a name *(Remember not to check the add README, just create a blank repo)*.
 + On VS code push the project dir to the repo *(If you dont know how look it up)*
@@ -77,11 +83,11 @@ python get_pickle_string.py
 + Scroll down to **Secrets and variable** and click **Actions**.
 + Scroll down and create **new repository secrets**.
 + You will need to create 4 secrets if you plan to run for youtube only but 6 if facebook is added to the mix.
-+ Here are what you should create, filing name and secrets respectivly:
++ Here are what you should create, filling name and secrets respectivly:
 1. HUGGING_FACE_API_KEY = *(the api you got from hugging face)*
-2. ACCOUNT_ID = *(the account id you got from cloudflare)
-3. API_TOKEN = *(the api you got from cloudflare)
-4. PICKLE_TOKEN = *(the long pickle string you made)
+2. ACCOUNT_ID = *(the account id you got from cloudflare)*
+3. API_TOKEN = *(the api you got from cloudflare)*
+4. PICKLE_TOKEN = *(the long pickle string you made)*
 + If you plan to run facebook along, go to main.py in the project file and go to line 74 and uncomment **run_script("upload_facebook.py")** (means remove the '#' in front of it) and add these two other secrets:
 5. FB_PAGE_ACCESS_TOKEN = *(facebook token)*
 6. FB_PAGE_ID = *(page id)*
@@ -89,4 +95,4 @@ python get_pickle_string.py
 + You will see something on the left side that says **Daily Tech Mage Upload** click it.
 + You will see something called **run workflow** click it and confirm **run workflow**.
 + Wait for it to run, you can refresh the page and wait for 5-8 min, if it checks green Congrats if not click and look for the error which can mostly come from you not seeting your secrets properly or having wrong api keys. Do make sure it all correct.
-+ If it checks green you are all good the tool will proceed to create post vids automatically by **11:00 and 18:00 UTC**
++ If it checks green you are all good the tool will proceed to create post vids automatically by **11:00 and 18:00 UTC**.
