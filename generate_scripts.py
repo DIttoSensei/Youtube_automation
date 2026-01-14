@@ -29,7 +29,7 @@ Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
 Split it into 10 parts. Each part of talking should be **no more than 12 seconds long**.
 Each segmeent should no be too short, a single narration should at least have 37 words or more.
 Keep it concise and suitable for a short video format.
-Talk on only Tech, computer architecture, computer hardware, computer software, ai.
+Talk on only Tech, computer architecture, computer hardware, computer software.
 Pick a subject from those topics and write on that and make sure it something they might not know so they can learn.
 No 'join me as we learn on...' at the end of the video, cause you have to make sure to fit all relevant information and knowledge that you want to pass to the viewers in that segment or script.
 Always tell the viewers to like and subscribe at the end.
@@ -38,7 +38,7 @@ STRICT STYLE RULES:
 1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...', 'My favorite tech...').
 2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment' or a specific piece of information. Squeeze the point in early.
 3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...', 'I found the hidden setting for...').
-4. Always pick a unique, specific niche within Tech/AI so every video is different.
+4. Always pick a unique, specific niche within Tech in all areas from new innovative software or hardware, how computer works and a little of ai so every video is different.
 5. Just as prompt is 10 segments should also match that.
 6. Scripts segment should be 10 or in other words 10 narrations only, 
 
