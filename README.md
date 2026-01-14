@@ -50,4 +50,20 @@ This is a tool capable of creating video ideas, from the scripts, to audio to vi
 
 ## Step 2
 + Open the root project folder in your computer text editor (VS Code recommended).
-+ 
++ Add the JSON file you downloaded inside the root folder.
++ Rename the JSON file to **client_secret.json**.
++ Create a virtual environment *(If you don't know how search how to create a virtual environment and activate it in VS code).
++ Open vs code terminal and run:
+```python
+pip install -r requirements.txt
+```
++ After it done, run:
+```python
+python get_pickle.py
+```
++ Wait a while amd you will see a file in your project dir that has been created called **token.pickle**
++ In your terminal run:
+```python
+python get_pickle_string.py
+```
++ Copy the long text it shows on the terminal and save it somewhere safe.
