@@ -16,7 +16,7 @@ STRICT STYLE RULES:
 4. Always pick a unique, specific niche within Tech in all areas from new innovative software or hardware, how computer works and a little of ai so every video is different.
 5. Just as prompt is 10 segments should also match that.
 6. Scripts segment should be 10 or in other words 10 narrations only, 
-
+7. Do not write nsfw content in the image prompt.
 IMPORTANT OUTPUT FORMAT:
 
 ===SCRIPT===
