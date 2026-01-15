@@ -17,6 +17,7 @@ STRICT STYLE RULES:
 5. Just as prompt is 10 segments should also match that.
 6. Scripts segment should be 10 or in other words 10 narrations only, 
 7. Do not write nsfw content in the image prompt.
+8. Segments should only be 10, Do not write more than 10.
 IMPORTANT OUTPUT FORMAT:
 
 ===SCRIPT===
