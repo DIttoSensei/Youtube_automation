@@ -14,19 +14,6 @@ STRUCTURE RULES:
 - Do not split thoughts across segments.
 - Do not create intro or outro segments outside the 10.
 
-TIMING FORMAT (FIXED):
-Use these timestamps exactly:
-1. 0–12
-2. 12–24
-3. 24–36
-4. 36–48
-5. 48–60
-6. 60–72
-7. 72–84
-8. 84–96
-9. 96–108
-10. 108–120
-
 CONTENT RULES:
 - Speak ONLY about Tech, computer architecture, computer hardware, computer software, or AI.
 - Pick ONE specific, lesser-known topic per script.
@@ -39,15 +26,11 @@ CONTENT RULES:
 OUTPUT FORMAT (STRICT):
 
 ===SCRIPT===
-Output a JSON array with EXACTLY 10 objects.
-Each object must include:
-- start (number)
-- end (number)
-- text (string)
+Output JSON array of narration segments with timestamps. Example:
 
-Example:
 [
-  {"start": 0, "end": 12, "text": "..."},
+  {"start": 0, "end": 12, "text": "First narration segment here"},
+  {"start": 12, "end": 24, "text": "Second narration segment here"},
   ...
 ]
 
