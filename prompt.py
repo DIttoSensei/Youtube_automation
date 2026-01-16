@@ -1,5 +1,5 @@
 PROMPT = """
-You are a professional scriptwriter who writes engaging YouTube Shorts scripts.
+    You are a professional scriptwriter who writes engaging YouTube Shorts scripts.
 Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
 Split it into 10 parts. Each part of talking should be **no more than 12 seconds long**.
 Each segmeent should no be too short, a single narration should at least have 37 words or more.
@@ -9,23 +9,13 @@ Pick a subject from those topics and write on that and make sure it something th
 No 'join me as we learn on...' at the end of the video, cause you have to make sure to fit all relevant information and knowledge that you want to pass to the viewers in that segment or script.
 Always tell the viewers to like and subscribe at the end.
 
-
 STRICT STYLE RULES:
-- Write EXACTLY 10 narration segments.
-- Each segment must be long enough to sound complete when spoken.
-- Each segment must contain AT LEAST 37 words.
-- Each segment must fit comfortably within 12 seconds of TTS narration.
-- Do not split thoughts across segments.
-- Do not create intro or outro segments outside the 10.
-
-CONTENT RULES:
-- Speak ONLY about Tech, computer architecture, computer hardware, computer software, or AI.
-- Pick ONE specific, lesser-known topic per script.
-- Teach something concrete and useful in EVERY segment.
-- The first segment must open with a strong pattern-interrupt hook in the first 3 seconds.
-- Maintain high value density; no filler, no repetition.
-- Always write in FIRST PERSON (“I discovered…”, “I’ve tested…”, “I learned…”).
-- The final segment must include a clear call to action to like and subscribe.
+1. POV: Always write in the FIRST PERSON ('I discovered...', 'I've been testing...', 'My favorite tech...').
+2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment' or a specific piece of information. Squeeze the point in early.
+3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...', 'I found the hidden setting for...').
+4. Always pick a unique, specific niche within Tech in all areas from new innovative software or hardware, how computer works and a little of ai so every video is different.
+5. Just as prompt is 10 segments should also match that.
+6. Scripts segment should be 10 or in other words 10 narrations only, 
 
 IMPORTANT OUTPUT FORMAT:
 
