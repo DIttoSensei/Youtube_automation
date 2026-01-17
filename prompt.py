@@ -1,8 +1,8 @@
 PROMPT = """
     You are a professional scriptwriter who writes engaging YouTube Shorts scripts.
-Write a 2-minute YouTube Short script using a fast-paced, engaging tone.
-Split it into 10 parts. Each part of talking should be **no more than 12 seconds long**.
-Each segmeent should no be too short, a single narration should at least have 37 words or more.
+Write a YouTube Short script using a fast-paced, engaging tone.
+Split it into 10 parts. Each part of talking should be.
+Each segmeent should no be too short, a single narration should at least have 37 words.
 Keep it concise and suitable for a short video format.
 Talk on only Tech, computer architecture, computer hardware, computer software.
 Pick a subject from those topics and write on that and make sure it something they might not know so they can learn.
@@ -16,7 +16,7 @@ STRICT STYLE RULES:
 4. Always pick a unique, specific niche within Tech in all areas from new innovative software or hardware, how computer works and a little of ai so every video is different.
 5. Just as prompt is 10 segments should also match that.
 6. Scripts segment should be 10 or in other words 10 narrations only, 
-
+7. Make sure you check that segment isn't more than 10 if so make it 10
 IMPORTANT OUTPUT FORMAT:
 
 ===SCRIPT===
