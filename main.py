@@ -2,6 +2,7 @@ import subprocess
 import os
 import time
 import sys
+import json
 
 # ================= CONFIGURATION =================
 SCRIPT_OUTPUT = "script_output.txt"
@@ -11,9 +12,9 @@ IMAGES_DIR = "images"
 AUDIO_DIR = "audio_segments"
 FINAL_VIDEO = "output/final_video_subtitled.mp4"
 
-REQUIRED_IMAGE_COUNT = 10
-REQUIRED_AUDIO_COUNT = 10
-STEP_DELAY = 7  # 7-second buffer
+REQUIRED_COUNT = 10
+MAX_AI_RETRIES = 3  # How many times to try re-generating if segment count is wrong
+STEP_DELAY = 5      # Seconds to wait between steps
 # =================================================
 
 def run_script(script_name):
@@ -21,69 +22,75 @@ def run_script(script_name):
     print(f"\n🚀 [MAIN] Starting: {script_name}")
     try:
         subprocess.run([sys.executable, script_name], check=True)
-        print(f"💤 Waiting {STEP_DELAY}s for system to settle...")
         time.sleep(STEP_DELAY) 
     except subprocess.CalledProcessError as e:
         print(f"❌ [MAIN] Error running {script_name}: {e}")
-        sys.exit(1)
+        return False
+    return True
 
-def wait_for_files(file_list, is_dir=False, required_count=0):
-    """Keeps checking for files until they exist."""
-    print(f"⏳ Verifying files...")
-    while True:
-        success = False
-        if is_dir:
-            if os.path.exists(file_list):
-                files = [f for f in os.listdir(file_list) if f.lower().endswith(('.png', '.jpg', '.mp3'))]
-                if len(files) >= required_count:
-                    success = True
-        else:
-            if all(os.path.exists(f) for f in file_list):
-                success = True
-        
-        if success:
-            print(f"✅ Verified! Proceeding to next task.")
-            break
-        time.sleep(2)
+def clean_failed_attempt():
+    """Deletes temporary files so the AI starts fresh on retry."""
+    files_to_wipe = [SCRIPT_OUTPUT, CONTENT_JSON, PROMPTS_JSON]
+    for f in files_to_wipe:
+        if os.path.exists(f):
+            os.remove(f)
+    print("🧹 Workspace cleared for fresh retry.")
+
+def check_segment_count():
+    """Checks if CONTENT_JSON has exactly the required number of segments."""
+    if not os.path.exists(CONTENT_JSON):
+        return False
+    try:
+        with open(CONTENT_JSON, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            count = len(data.get("script_segments", []))
+            print(f"📊 Quality Check: Found {count} segments.")
+            return count == REQUIRED_COUNT
+    except Exception as e:
+        print(f"⚠️ Error reading JSON: {e}")
+        return False
 
 def main():
-    print("--- 🪄 TECH MAGE AUTOMATION STARTING ---")
+    print("--- 🪄 TECH MAGE AUTOMATION: ACTIVATED ---")
 
-    # STEP 1: Generate Script
-    run_script("generate_scripts.py") 
-    wait_for_files([SCRIPT_OUTPUT])
+    # --- STEP 1 & 2: REGENERATION LOOP ---
+    script_ready = False
+    for attempt in range(MAX_AI_RETRIES):
+        print(f"\n🎬 [PHASE 1] Script Generation Attempt {attempt + 1} of {MAX_AI_RETRIES}")
+        
+        run_script("generate_scripts.py")
+        run_script("extract.py")
 
-    # STEP 2: Extract JSONs
-    run_script("extract.py")
-    wait_for_files([CONTENT_JSON, PROMPTS_JSON])
+        if check_segment_count():
+            script_ready = True
+            break
+        else:
+            print(f"⚠️ Segment count incorrect (Not {REQUIRED_COUNT}).")
+            clean_failed_attempt()
 
-    # STEP 3: Generate Images
+    if not script_ready:
+        print("❌ FATAL: AI failed to produce 10 segments after multiple tries. Exiting.")
+        sys.exit(1)
+
+    # --- STEP 3: ASSETS ---
     run_script("generate_image.py")
-    wait_for_files(IMAGES_DIR, is_dir=True, required_count=REQUIRED_IMAGE_COUNT)
-
-    # STEP 4: Generate Audio
     run_script("make_audio.py") 
-    wait_for_files(AUDIO_DIR, is_dir=True, required_count=REQUIRED_AUDIO_COUNT)
 
-    # STEP 5: Render Video
-    run_script("make_vid.py")
-    wait_for_files([FINAL_VIDEO])
+    # --- STEP 4: RENDER ---
+    if not run_script("make_vid.py"):
+        print("❌ Video render failed.")
+        sys.exit(1)
 
-    # STEP 6: Upload to Facebook (NEW - Runs First)
-    # If this fails, sys.exit(1) triggers and YouTube (Step 7) never runs.
+    # --- STEP 5: DEPLOYMENT ---
+    # We use 'if' so that if FB fails, we can still try YouTube
+    print("\n🌍 [PHASE 2] Starting Social Deployment...")
     run_script("upload_facebook.py")
-
-    # STEP 7: Upload to YouTube
     run_script("upload.py")
 
-    # STEP 8: Final Cleanup
-    print(f"💤 Final {STEP_DELAY}s wait before clearing folders...")
-    time.sleep(STEP_DELAY)
+    # --- STEP 6: CLEANUP ---
+    print("\n🧹 Mission Accomplished. Cleaning folders...")
     run_script("clear_folders.py")
-
-    print("\n" + "="*40)
-    print(f"🎉 TECH MAGE: MISSION ACCOMPLISHED!")
-    print("="*40)
+    print("✅ SYSTEM READY FOR NEXT RUN.")
 
 if __name__ == "__main__":
     main()
