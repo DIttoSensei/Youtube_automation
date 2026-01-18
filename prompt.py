@@ -27,7 +27,6 @@ Output JSON array of narration segments with timestamps. Example:
   {"start": 12, "end": 24, "text": "Second narration segment here"},
   ...
 ]
-(should be 10 segments)
 
 ===PROMPTS===
 Write exactly 10 cinematic image prompts, one per line, numbered 1 to 10.
