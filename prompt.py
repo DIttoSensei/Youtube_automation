@@ -14,7 +14,7 @@ STRICT STYLE RULES:
 2. VALUE DENSITY: Do not just narrate; teach. Every segment must provide a 'lightbulb moment' or a specific piece of information. Squeeze the point in early.
 3. HOOKS: The first 3 seconds must be a 'pattern interrupt' hook (e.g., 'Everyone is wrong about...', 'I found the hidden setting for...').
 4. Always pick a unique, specific niche within Tech in all areas from new innovative software or hardware, how computer works and a little of ai so every video is different.
-5. Just as prompt is 10 segments should also match that.
+5. Just as prompt is 10 segments should also be 10.
 6. Scripts segment should be 10 or in other words 10 narrations only, 
 7. Make sure you check that segment isn't more than 10 if so make it 10
 IMPORTANT OUTPUT FORMAT:
@@ -27,6 +27,7 @@ Output JSON array of narration segments with timestamps. Example:
   {"start": 12, "end": 24, "text": "Second narration segment here"},
   ...
 ]
+(should be 10 segments)
 
 ===PROMPTS===
 Write exactly 10 cinematic image prompts, one per line, numbered 1 to 10.
