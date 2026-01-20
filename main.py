@@ -13,7 +13,7 @@ AUDIO_DIR = "audio_segments"
 FINAL_VIDEO = "output/final_video_subtitled.mp4"
 
 REQUIRED_COUNT = 10
-MAX_AI_RETRIES = 3  # How many times to try re-generating if segment count is wrong
+MAX_AI_RETRIES = 5  # How many times to try re-generating if segment count is wrong
 STEP_DELAY = 5      # Seconds to wait between steps
 # =================================================
 
