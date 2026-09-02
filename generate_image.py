@@ -36,7 +36,7 @@ for index, prompt in enumerate(prompts):
 
     payload = {
         "prompt": f"{prompt}, high quality, realistic, 8k",
-        "num_steps": 4 
+        "steps": 4 
     }
 
     try:
